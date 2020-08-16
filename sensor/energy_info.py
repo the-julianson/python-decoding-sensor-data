@@ -1,4 +1,4 @@
-from .house_info import HouseInfo
+from house_info import HouseInfo
 
 from datetime import date
 
@@ -28,6 +28,10 @@ class EnergyData(HouseInfo):
     def get_data_by_area(self, rec_area=0):
         recs = super().get_data_by_area('energy_usage', rec_area)
         return self._convert_data(recs)
+
+    def calculate_energy_usage(self, data):
+        total_energy = sum([field * self.ENERGY_PER_BULB for field in data])
+        return total_energy
 
 
 
